@@ -27,8 +27,7 @@ module.exports = function(entity, naming) {
     first = [
       `import { ${capitalName} } from '../${capitalName.toLowerCase()}';`,
       "",
-      `export class ${normalize(naming.stringify(entity), naming)} extends ${capitalName} {`,
-      ""
+      `export class ${normalize(naming.stringify(entity), naming)} extends ${capitalName} {`
     ]
   } else {
     first = [
@@ -36,8 +35,8 @@ module.exports = function(entity, naming) {
       `import { BemEntityMixin } from '@/components/bem-entity';`,
       "",
       `export class ${normalize(naming.stringify(entity), naming)} extends BemEntityMixin(DomElement) {`,
-      "",
       "  static instances = {};",
+      "",
       `  static bemEntityName = '${name}';`,
       ""
     ];
