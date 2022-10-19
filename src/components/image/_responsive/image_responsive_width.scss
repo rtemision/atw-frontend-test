@@ -1,0 +1,9 @@
+.image_responsive_width {
+  width: 100%;
+  height: auto;
+
+  > svg {
+    width: inherit;
+    height: inherit;
+  }
+}

@@ -1,0 +1,34 @@
+.theme_root_default {
+  --typography-headline-font-family: 'Open Sans', sans-serif;
+  --typography-body-font-family: 'Open Sans', sans-serif;
+  --typography-controls-font-family: 'Open Sans', sans-serif;
+
+  --typography-body-font-size: 16px;
+  --typography-body-font-weight-base: 400;
+  --typography-body-font-weight-bold: 600;
+  --typography-body-line-height: 1.25;
+  --typography-body-letter-spacing: normal;
+
+  --typography-headline-font-weight: 700;
+
+  --text-headline-m-font-size: 18px;
+  --text-headline-m-line-height: 1.25;
+  --text-headline-m-letter-spacing: normal;
+
+  @media (--sm-min) {
+    --text-headline-m-font-size: 22px;
+  }
+
+  --button-size-m-font-size: 14px;
+  --button-size-m-line-height: 1.2;
+  --button-size-m-letter-spacing: normal;
+  --button-size-m-space-all: 8px;
+
+  @media (--md-min) {
+    --button-size-m-font-size: 16px;
+    --button-size-m-space-all: 10px 12px;
+  }
+
+  --button-view-default-border-width: 1px;
+  --button-view-default-border-radius: 2px;
+}

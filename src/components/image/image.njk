@@ -1,0 +1,38 @@
+{% from 'dom-element/dom-element.njk' import domElement %}
+{#
+  @param {Object} data
+  @param {String} data.url
+  @param {String} data.title
+  @param {String} data.alt
+  @param {String|Number} data.width
+  @param {String|Number} data.height
+  @param {String|HTML} data.content
+
+  @example img
+    {{ image({ url: 'path/myImage.svg' }) }}
+
+  @example svg code
+    {{ image({ content: 'path/myImage.svg' | svgContents }) }}
+#}
+{% macro image(data) %}
+  {% set content = data.content %}
+  {{ domElement({
+    tag: 'img' if not content else 'span',
+    bemEntity: {
+      block: 'image',
+      mods: data.mods,
+      mix: data.mix,
+      classname: data.classname
+    },
+    attrs: {
+      role: 'img' if content else false,
+      src: data.url if not content else false,
+      loading: data.loading if data.loading else false,
+      width: data.width,
+      height: data.height,
+      alt: data.alt,
+      title: data.title
+    },
+    content: content
+  }) }}
+{% endmacro %}

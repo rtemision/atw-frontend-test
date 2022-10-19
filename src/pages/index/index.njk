@@ -1,0 +1,123 @@
+{% from 'snetworks/snetworks.njk' import snetworks %}
+{% from 'icon/icon.njk' import icon %}
+{% from 'cursor/cursor.njk' import cursor %}
+{% from 'picture/picture.njk' import picture %}
+
+{% set page = {
+  title: 'Index',
+  lang: 'en',
+  classlist: ['page_type_root']
+} %}
+{% extends 'page/page.njk' %}
+{% block main %}
+
+  {{ cursor({ mods: { view: 'default' } }) }}
+
+  <section class="section section_view_main photo-show page__section-main">
+    <div class="section__inner">
+      <div class="section__images">
+        {% for item in [
+          'adam-kool-ndN00KmbJ1c-unsplash',
+          'david-marcu-78A265wPiO4-unsplash',
+          'irina-iriser-2Y4dE8sdhlc-unsplash',
+          'kace-rodriguez-p3OzJuT_Dks-unsplash',
+          'kalen-emsley-Bkci_8qcdvQ-unsplash',
+          'luca-bravo-ESkw2ayO2As-unsplash',
+          'lukasz-szmigiel-jFCViYFYcus-unsplash',
+          'robert-lukeman-_RBcxo9AU-U-unsplash',
+          'sergei-a--heLWtuAN3c-unsplash',
+          'v2osk-1Z2niiBPg5A-unsplash'
+        ] %}
+          <div class="photo-show__item section__photo">
+            {{ picture({
+              mods: {
+                display: 'block',
+                width: 'available',
+                height: 'available'
+              },
+              mix: [
+                {
+                  block: 'section',
+                  elem: 'picture'
+                },
+                {
+                  block: 'photo-show',
+                  elem: 'picture'
+                }
+              ],
+              imageMods: {
+                display: 'block',
+                width: 'available',
+                height: 'available',
+                position: 'center',
+                fit: 'cover'
+              },
+              imageMix: [
+                {
+                  block: 'section',
+                  elem: 'photo-img'
+                },
+                {
+                  block: 'photo-show',
+                  elem: 'img'
+                }
+              ],
+              loading: 'lazy',
+              source: [
+                { srcset: '/assets/images/' + item + '.webp', type: 'webp' }
+              ],
+              url: '/assets/images/' + item + '.jpg'
+            }) }}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="layout">
+        {{ snetworks({
+          mods: {
+            view: 'default',
+            size: 'm'
+          },
+          mix: {
+            block: 'section',
+            elem: 'snetworks'
+          },
+          title: 'Links',
+          items: [
+            {
+              icon: icon({
+                mods: { color: 'twitter' },
+                content: '<svg><use xlink:href="/spritemap.svg#sprite-twitter" /></svg>'
+              }),
+              text: 'Twitter',
+              url: 'https://twitter.com'
+            },
+            {
+              icon: icon({
+                mods: { color: 'vk' },
+                content: '<svg><use xlink:href="/spritemap.svg#sprite-vk" /></svg>'
+              }),
+              text: 'VK',
+              url: 'https://vk.com'
+            },
+            {
+              icon: icon({
+                mods: { color: 'telegram' },
+                content: '<svg><use xlink:href="/spritemap.svg#sprite-telegram" /></svg>'
+              }),
+              text: 'Telegram',
+              url: 'https://telegram.org'
+            },
+            {
+              icon: icon({
+                mods: { color: 'youtube' },
+                content: '<svg><use xlink:href="/spritemap.svg#sprite-youtube" /></svg>'
+              }),
+              text: 'Youtube',
+              url: 'https://youtube.com'
+            }
+          ]
+        }) }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,79 @@
+@import '@/components/sprites/sprites';
+
+.cursor_view_default {
+  width: 36px;
+  height: 36px;
+  transition: transform ease-in .05s;
+
+  .cursor__base {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+
+    /* center */
+    /* &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: red;
+      border-radius: 50%;
+      width: 2px;
+      height: 2px;
+    } */
+  }
+
+  .cursor__inner {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: cursor-view-default 4s linear infinite;
+  }
+
+  .cursor__angle {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    @include sprite('chevron_right_24dp');
+
+    &_pos_01 {
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%) rotate(calc(-45deg * 3));
+    }
+
+    &_pos_11 {
+      top: 0;
+      right: 0;
+      transform: translate(50%, -50%) rotate(-45deg);
+    }
+
+    &_pos_10 {
+      bottom: 0;
+      right: 0;
+      transform: translate(50%, 50%) rotate(45deg);
+    }
+
+    &_pos_00 {
+      bottom: 0;
+      left: 0;
+      transform: translate(-50%, 50%) rotate(calc(45deg * 3));
+    }
+  }
+}
+
+@keyframes cursor-view-default {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

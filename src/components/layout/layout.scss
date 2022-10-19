@@ -1,0 +1,15 @@
+.layout {
+  display: block;
+  box-sizing: border-box;
+  padding-left: var(--layout-side-space);
+  padding-right: var(--layout-side-space);
+  max-width: var(--layout-max-width);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  .layout {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

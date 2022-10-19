@@ -1,0 +1,15 @@
+.theme_layout_default {
+  --layout-grid-column-gap: 8px;
+  --layout-grid-row-gap: 0;
+  --layout-side-space: 20px;
+  --layout-max-width: 100%;
+
+  @media (--sm-min) {
+    --layout-grid-column-gap: 16px;
+    --layout-side-space: 32px;
+  }
+
+  @media (--md-min) {
+    --layout-grid-column-gap: 32px;
+  }
+}

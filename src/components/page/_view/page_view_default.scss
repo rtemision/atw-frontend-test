@@ -1,0 +1,23 @@
+.page_view_default {
+  .page__body {
+    position: relative;
+    overflow-x: hidden;
+    font-family: var(--typography-body-font-family);
+    font-size: var(--typography-body-font-size);
+    font-weight: var(--typography-body-font-weight-base);
+    line-height: var(--typography-body-line-height);
+    letter-spacing: var(--typography-body-letter-spacing);
+    color: var(--color-typo-base);
+    background: var(--color-fill-base);
+    cursor: url("../../../assets/icons/cursor-32.svg") 11 6, default;
+
+    *::selection {
+      color: var(--color-typo-selection);
+      background: var(--color-fill-selection);
+    }
+  }
+
+  .page__section-main {
+    flex: 1;
+  }
+}

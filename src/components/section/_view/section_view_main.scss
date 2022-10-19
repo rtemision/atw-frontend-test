@@ -1,0 +1,43 @@
+.section_view_main {
+  display: grid;
+  grid-template-columns: 100%;
+
+  .section__inner {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 32px;
+  }
+
+  .section__images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+  }
+
+  .section__snetworks {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+  }
+
+  .section__photo {
+    width: 120px;
+    aspect-ratio: 16 / 9;
+    user-select: none;
+
+    @media (--sm-min) {
+      width: 240px;
+    }
+
+    @media (--md-min) {
+      width: 360px;
+    }
+  }
+
+  .section__picture {
+    transform: translate(-50%, -50%);
+  }
+}

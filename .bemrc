@@ -1,0 +1,23 @@
+module.exports = {
+  root: true,
+  modules: {
+    'bem-tools': {
+      plugins: {
+        create: {
+          templates: {
+            'scss': '.bem/templates/css.js',
+            'js': '.bem/templates/js.js',
+            'mixin.js': '.bem/templates/mixin.js.js',
+            'njk': '.bem/templates/njk.js'
+          },
+          techs: ['njk', 'scss', 'js'],
+          levels: {
+            'src/components': {
+              default: true
+            }
+          }
+        }
+      }
+    }
+  }
+}

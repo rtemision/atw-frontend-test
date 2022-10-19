@@ -1,0 +1,45 @@
+{% from 'dom-element/dom-element.njk' import domElement %}
+{% from 'link/link.njk' import link %}
+{#
+  @param {Object} data
+#}
+{% macro snetworks(data) %}
+  {% set content %}
+    <div class="snetworks__inner">
+      {% if data.title %}
+        <p class="text text_weight_700 text_size_headline-m snetworks__title">Links</p>
+      {% endif %}
+      <ul class="list snetworks__list">
+        {% for item in data.items %}
+          <li class="list__item snetworks__item">
+            {{ link({
+              mods: {
+                view: 'text'
+              },
+              mix: {
+                block: 'snetworks',
+                elem: 'link'
+              },
+              url: item.url,
+              target: '_blank',
+              label: item.label,
+              title: item.title,
+              text: item.text,
+              icon: item.icon
+            }) }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endset %}
+
+  {{ domElement({
+    bemEntity: {
+      block: 'snetworks',
+      mods: data.mods,
+      mix: data.mix,
+      classname: data.classname
+    },
+    content: content
+  }) }}
+{% endmacro %}

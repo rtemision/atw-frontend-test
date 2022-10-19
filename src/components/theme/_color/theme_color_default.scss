@@ -1,0 +1,40 @@
+$color-brand-primary: #44a452;
+$color-typo-base: #333;
+$color-typo-disabled: #8f8f8f;
+
+.theme_color_default {
+  --color-typo-base: #{$color-typo-base};
+  --color-typo-disabled: #{$color-typo-disabled};
+  --color-fill-base: #fff;
+  --color-typo-selection: #fff;
+  --color-fill-selection: var(--color-brand-primary);
+
+  --color-brand-primary: #{$color-brand-primary};
+
+  --color-brand-vk-primary: #07f;
+  --color-brand-twitter-primary: #1d9bf0;
+  --color-brand-telegram-primary: #28a8ea;
+  --color-brand-youtube-primary: #f00;
+
+  --color-webkit-tap-highlight: rgba(0, 0, 0, 0);
+
+  --color-control-typo-base: #333;
+  --color-control-fill-base: #fff;
+  --color-control-fill-disabled: #ececec;
+  --color-control-border-base: #ccc;
+  --color-control-border-disabled: #aeaeae;
+
+  // --color-link-view-default-typo-base: var(--color-brand-primary);
+  // --color-link-view-default-typo-hovered: #{darken($color-brand-primary, 10%)};
+  // --color-link-view-default-typo-disabled: var(--color-typo-disabled);
+  // --color-link-view-default-border-base: #{rgba($color-brand-primary, 30%)};
+  // --color-link-view-default-border-hovered: #{darken($color-brand-primary, 10%)};
+  // --color-link-view-default-border-disabled: #{rgba($color-typo-disabled, 30%)};
+
+  --color-link-view-text-typo-base: var(--color-typo-base);
+  --color-link-view-text-typo-hovered: var(--color-brand-primary);
+  --color-link-view-text-typo-disabled: var(--color-typo-disabled);
+  --color-link-view-text-border-base: #{rgba($color-typo-base, 30%)};
+  --color-link-view-text-border-hovered: var(--color-brand-primary);
+  --color-link-view-text-border-disabled: #{rgba($color-typo-disabled, 30%)};
+}

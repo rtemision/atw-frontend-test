@@ -1,0 +1,5 @@
+.layout_type_grid {
+  display: grid;
+  grid-column-gap: var(--layout-grid-column-gap);
+  grid-row-gap: var(--layout-grid-row-gap);
+}

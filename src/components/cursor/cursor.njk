@@ -1,0 +1,25 @@
+{% from 'dom-element/dom-element.njk' import domElement %}
+{#
+  @param {Object} data
+#}
+{% macro cursor(data) %}
+  {% set content %}
+    <div class="cursor__base">
+      <div class="cursor__inner">
+        {% for pos in ['01', '11', '10', '00'] %}
+          <div class="cursor__angle cursor__angle_pos_{{pos}}"></div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endset %}
+
+  {{ domElement({
+    bemEntity: {
+      block: 'cursor',
+      mods: data.mods,
+      mix: data.mix,
+      classname: data.classname
+    },
+    content: content
+  }) }}
+{% endmacro %}

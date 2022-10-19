@@ -1,0 +1,14 @@
+@import '../mixins//link_colorized.scss';
+
+.link_view_default {
+  @include link_colorized(
+    var(--color-link-view-default-typo-base), /* $typoColorBase */
+    var(--color-link-view-default-border-base), /* $borderColorBase */
+
+    var(--color-link-view-default-typo-hovered), /* $typoColorHovered */
+    var(--color-link-view-default-border-hovered), /* $borderColorHovered */
+
+    var(--color-link-view-default-typo-disabled), /* $typoColorDisabled */
+    var(--color-link-view-default-border-disabled) /* $borderColorDisabled */
+  );
+}

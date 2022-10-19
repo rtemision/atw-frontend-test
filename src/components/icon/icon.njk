@@ -1,0 +1,19 @@
+{% from 'dom-element/dom-element.njk' import domElement %}
+{#
+  @param {Object} data
+#}
+{% macro icon(data) %}
+  {{ domElement({
+    tag: 'span',
+    bemEntity: {
+      block: 'icon',
+      mods: data.mods,
+      mix: data.mix,
+      classname: data.classname
+    },
+    attrs: {
+      style: 'background-image:url(' + data.url + ')' if data.url else false
+    } | merge(data.attrs),
+    content: data.content
+  }) }}
+{% endmacro %}

@@ -1,0 +1,12 @@
+.snetworks_size_m {
+  --snetworks-space-between-items: 12px;
+  --snetworks-item-icon-size: 20px;
+  --snetworks-item-link-gap: 4px;
+  --snetworks-item-font-size: 14px;
+
+  @media (--md-min) {
+    --snetworks-space-between-items: 16px;
+    --snetworks-item-icon-size: 32px;
+    --snetworks-item-font-size: 16px;
+  }
+}

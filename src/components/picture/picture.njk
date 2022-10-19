@@ -1,0 +1,37 @@
+{% from 'dom-element/dom-element.njk' import domElement %}
+{% from 'image/image.njk' import image %}
+{#
+  @param {Object} data
+#}
+{% macro picture(data) %}
+  {% set mix = [{
+    block: 'picture',
+    elem: 'image'
+  }] | concat(data.imageMix) %}
+  {% set content %}
+    {% for item in data.source %}
+      <source srcset="{{ item.srcset }}" type="image/{{ item.type }}">
+    {% endfor %}
+    {{ image({
+      mods: data.imageMods,
+      mix: mix,
+      loading: data.loading,
+      alt: data.alt,
+      title: data.title,
+      width: data.width,
+      height: data.height,
+      url: data.url
+    }) }}
+  {% endset %}
+
+  {{ domElement({
+    tag: 'picture',
+    bemEntity: {
+      block: 'picture',
+      mods: data.mods,
+      mix: data.mix,
+      classname: data.classname
+    },
+    content: content
+  }) }}
+{% endmacro %}

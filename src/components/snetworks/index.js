@@ -1,0 +1,10 @@
+import '@/components/list';
+import '@/components/icon';
+import '@/components/link';
+import '@/components/text';
+import '@/components/icon/_color/icon_color_youtube.scss';
+import '@/components/icon/_color/icon_color_twitter.scss';
+import '@/components/icon/_color/icon_color_vk.scss';
+import '@/components/icon/_color/icon_color_telegram.scss';
+import './_size/snetworks_size_m.scss';
+import './_view/snetworks_view_default.scss';

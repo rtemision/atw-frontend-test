@@ -1,0 +1,9 @@
+.icon {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 50%;
+
+  > svg {
+    vertical-align: middle;
+  }
+}
