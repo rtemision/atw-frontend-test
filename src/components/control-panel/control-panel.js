@@ -2,6 +2,14 @@ import { domReady } from '@/components/dom-ready';
 import { DomElement } from '@/components/dom-element';
 import { BemEntityMixin } from '@/components/bem-entity';
 import { ButtonToggable } from '@/components/button';
+import Cookies from 'js-cookie';
+
+const cookieName = 'features';
+const cookieSettings = {
+  expires: 7,
+  path: '/',
+  sameSite: 'lax'
+}
 
 export class ControlPanel extends BemEntityMixin(DomElement) {
 
@@ -23,6 +31,15 @@ export class ControlPanel extends BemEntityMixin(DomElement) {
     domElem.addEventListener('checked-change', this._onCheckedChange.bind(this));
 
     this._loadFeaturesFromButtons();
+
+    /**
+     * Since there is no server, * the values of the settings
+     * obtained from the state of the buttons (`checked` mod) may not be valid.
+     *
+     * So we change the state of the buttons
+     * according to what is stored in the cookies
+     */
+    this._loadFeaturesFromCookies();
   }
 
   _loadFeaturesFromButtons() {
@@ -31,6 +48,25 @@ export class ControlPanel extends BemEntityMixin(DomElement) {
     this._buttons.forEach(button => {
       features[button.params.feature] = button.getMod('checked');
     });
+  }
+
+  _loadFeaturesFromCookies() {
+    const cookie = Cookies.get(cookieName);
+
+    if (!cookie) return;
+
+    const cookieFeatures = JSON.parse(cookie);
+    const features = this.features;
+
+    for (const feature in features) {
+      const val = features[feature];
+      const cookieVal = cookieFeatures[feature];
+
+      if (typeof cookieVal !== 'undefined' && val !== cookieVal) {
+        const button = this._getButtonFeature(feature);
+        button && button.setMod('checked', cookieVal);
+      }
+    }
   }
 
   _getButtonFeature(feature) {
@@ -50,6 +86,7 @@ export class ControlPanel extends BemEntityMixin(DomElement) {
 
     if (features[feature] !== val) {
       features[feature] = val;
+      Cookies.set(cookieName, JSON.stringify(features), cookieSettings);
       this._emit('feature-change', { name: feature, enabled: val });
     }
   }
