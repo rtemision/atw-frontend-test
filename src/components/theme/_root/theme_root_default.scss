@@ -15,6 +15,7 @@
   --text-headline-m-line-height: 1.25;
   --text-headline-m-letter-spacing: normal;
 
+  // postcss-custom-media
   @media (--sm-min) {
     --text-headline-m-font-size: 22px;
   }
@@ -24,6 +25,7 @@
   --button-size-m-letter-spacing: normal;
   --button-size-m-space-all: 8px;
 
+  // postcss-custom-media
   @media (--md-min) {
     --button-size-m-font-size: 16px;
     --button-size-m-space-all: 10px 12px;

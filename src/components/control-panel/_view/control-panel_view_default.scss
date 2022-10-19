@@ -4,6 +4,7 @@
     flex-flow: column wrap;
     gap: 2px;
 
+    // postcss-custom-media
     @media (--sm-min) {
       flex-direction: row;
     }

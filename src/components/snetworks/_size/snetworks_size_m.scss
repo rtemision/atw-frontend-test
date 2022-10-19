@@ -4,6 +4,7 @@
   --snetworks-item-link-gap: 4px;
   --snetworks-item-font-size: 14px;
 
+  // postcss-custom-media
   @media (--md-min) {
     --snetworks-space-between-items: 16px;
     --snetworks-item-icon-size: 32px;

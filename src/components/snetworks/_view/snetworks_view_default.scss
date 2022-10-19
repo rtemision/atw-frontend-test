@@ -9,6 +9,7 @@
     flex-flow: column wrap;
     gap: var(--snetworks-space-between-items);
 
+    // postcss-custom-media
     @media (--sm-min) {
       flex-flow: row wrap;
       align-items: center;

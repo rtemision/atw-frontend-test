@@ -4,11 +4,13 @@
   --layout-side-space: 20px;
   --layout-max-width: 100%;
 
+  // postcss-custom-media
   @media (--sm-min) {
     --layout-grid-column-gap: 16px;
     --layout-side-space: 32px;
   }
 
+  // postcss-custom-media
   @media (--md-min) {
     --layout-grid-column-gap: 32px;
   }
