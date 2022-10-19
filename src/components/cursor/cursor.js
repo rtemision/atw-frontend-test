@@ -4,14 +4,14 @@ import { BemEntityMixin } from '@/components/bem-entity';
 import { throttle } from '@/components/functions/__throttle';
 
 export class Cursor extends BemEntityMixin(DomElement) {
-
   static instances = {};
+
   static bemEntityName = 'cursor';
 
   constructor(domElem) {
     super(domElem);
     this.throttledMouseMove = throttle(this._onMouseMove, 100, this);
-    this.hasMod('enabled') && this._start();
+    if (this.hasMod('enabled')) this._start();
     domElem.addEventListener('mod-change', this._onModChange.bind(this));
   }
 
@@ -26,15 +26,17 @@ export class Cursor extends BemEntityMixin(DomElement) {
 
   _onModChange({ detail }) {
     if (detail.modName === 'enabled') {
-      detail.modVal ?
-        this._start() :
+      if (detail.modVal) {
+        this._start();
+      } else {
         this._stop();
+      }
     }
   }
 
   _onMouseMove(e) {
     const event = (e.touches || [])[0] || e;
-    this.hasMod('visible') || this.setMod('visible');
+    if (!this.hasMod('visible')) this.setMod('visible');
     window.requestAnimationFrame(() => {
       this.domElem.style.transform = `translate3d(${event.pageX}px, ${event.pageY}px, 0)`;
     });
@@ -42,5 +44,6 @@ export class Cursor extends BemEntityMixin(DomElement) {
 }
 
 domReady.then(() => {
+  // eslint-disable-next-line no-new
   new Cursor(document.querySelector(`.${Cursor.bemEntityName}`));
 });

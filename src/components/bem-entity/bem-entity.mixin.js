@@ -15,8 +15,7 @@ const MOD_DELIM = '_';
 const ELEM_DELIM = '__';
 const NAME_PATTERN = '[a-zA-Z0-9-]+';
 
-const BemEntityMixinImplementation = Base => class BemEntity extends Base {
-
+const BemEntityMixinImplementation = (Base) => class BemEntity extends Base {
   constructor(...args) {
     super(...args);
     this._modCache = {};
@@ -43,15 +42,16 @@ const BemEntityMixinImplementation = Base => class BemEntity extends Base {
   /**
    * @see https://github.com/bem/bem-core/blob/88d5f569564073a5418caa573fbb5740bc977871/common.blocks/i-bem-dom/i-bem-dom.js#L700
    */
-   _extractModVal(modName) {
-    let domNode = this.domElem,
-        matches;
+  _extractModVal(modName) {
+    const domNode = this.domElem;
+    let matches;
 
-    domNode &&
-        (matches = domNode.className
-            .match(this._buildModValRE(modName)));
+    if (domNode) {
+      matches = domNode.className
+        .match(this._buildModValRE(modName));
+    }
 
-    return matches? matches[2] || true : '';
+    return matches ? matches[2] || true : '';
   }
 
   /**
@@ -62,10 +62,7 @@ const BemEntityMixinImplementation = Base => class BemEntity extends Base {
    * @see https://github.com/bem/bem-core/blob/88d5f569564073a5418caa573fbb5740bc977871/common.blocks/i-bem-dom/i-bem-dom.js#L824
    */
   _buildModValRE(modName) {
-    return new RegExp(
-        '(\\s|^)' +
-        this._buildModClassNamePrefix(modName) +
-        '(?:' + MOD_DELIM + '(' + NAME_PATTERN + '))?(?=\\s|$)');
+    return new RegExp(`(\\s|^)${this._buildModClassNamePrefix(modName)}(?:${MOD_DELIM}(${NAME_PATTERN}))?(?=\\s|$)`);
   }
 
   /**
@@ -84,9 +81,10 @@ const BemEntityMixinImplementation = Base => class BemEntity extends Base {
    */
   getMod(modName) {
     const modCache = this._modCache;
-    return modName in modCache?
-        modCache[modName] || '' :
-        modCache[modName] = this._extractModVal(modName);
+    // eslint-disable-next-line no-return-assign
+    return modName in modCache
+      ? modCache[modName] || ''
+      : modCache[modName] = this._extractModVal(modName);
   }
 
   /**
@@ -99,47 +97,52 @@ const BemEntityMixinImplementation = Base => class BemEntity extends Base {
   /**
    * Sets the modifier for a BEM entity
    * @param {String} modName Modifier name
-   * @param {String|Boolean} [modVal=true] Modifier value. If not of type String or Boolean, it is casted to String
+   * @param {String|Boolean} [modVal=true] Modifier value. If not of type String or Boolean,
+   * it is casted to String
    * @see https://github.com/bem/bem-core/blob/v4/common.blocks/i-bem/i-bem.vanilla.js#L271
    */
   setMod(modName, modVal) {
-    let typeModVal = typeof modVal,
-        bemEntityName  = this.bemEntityName,
-        modClasName = bemEntityName + MOD_DELIM + modName,
-        curModVal = this.getMod(modName);
+    const typeModVal = typeof modVal;
+    const { bemEntityName } = this;
+    const curModVal = this.getMod(modName);
+    let modClasName = bemEntityName + MOD_DELIM + modName;
+    let formatedModVal = modVal;
 
     if (typeModVal === 'undefined') {
-      modVal = true;
+      formatedModVal = true;
     } else if (typeModVal === 'boolean') {
-      modVal === false && (modVal = '');
+      if (formatedModVal === false) formatedModVal = '';
     } else {
-      modVal = modVal.toString();
-      modVal !== '' && (modClasName += MOD_DELIM + modVal);
+      formatedModVal = formatedModVal.toString();
+      if (formatedModVal !== '') modClasName += MOD_DELIM + formatedModVal;
     }
 
-    if (curModVal == modVal) return this;
+    // eslint-disable-next-line eqeqeq
+    if (curModVal == formatedModVal) return this;
 
     if (curModVal) {
-      let curModValIsBool = typeof curModVal === 'boolean';
+      const curModValIsBool = typeof curModVal === 'boolean';
 
-      if (modVal === '') {
-        !curModValIsBool && (modClasName += MOD_DELIM + curModVal);
+      if (formatedModVal === '') {
+        if (!curModValIsBool) modClasName += MOD_DELIM + curModVal;
       } else {
         this.domElem.classList.remove(
-          bemEntityName + MOD_DELIM + modName + (curModValIsBool ?
-            '' : MOD_DELIM + curModVal));
+          bemEntityName + MOD_DELIM + modName + (curModValIsBool
+            ? ''
+            : MOD_DELIM + curModVal)
+        );
       }
     }
 
     this.domElem.classList[
-      modVal ? 'add' : 'remove'
+      formatedModVal ? 'add' : 'remove'
     ](modClasName);
 
-    this._modCache[modName] = modVal;
+    this._modCache[modName] = formatedModVal;
 
     this._emit('mod-change', {
-      modName: modName,
-      modVal: modVal,
+      modName,
+      modVal: formatedModVal,
       oldModVal: curModVal
     });
 
@@ -149,21 +152,23 @@ const BemEntityMixinImplementation = Base => class BemEntity extends Base {
   /**
    * Checks whether a BEM entity has a modifier
    * @param {String} modName Modifier name
-   * @param {String|Boolean} [modVal] Modifier value. If not of type String or Boolean, it is casted to String
+   * @param {String|Boolean} [modVal] Modifier value. If not of type String or Boolean,
+   * it is casted to String
    * @returns {Boolean}
    * @see https://github.com/bem/bem-core/blob/v4/common.blocks/i-bem/i-bem.vanilla.js#L245
    */
   hasMod(modName, modVal) {
-    let typeModVal = typeof modVal,
-        className = this.bemEntityName + '_' + modName;
+    const typeModVal = typeof modVal;
+    let className = `${this.bemEntityName}_${modName}`;
+    let formatedModVal = modVal;
 
     if (typeModVal === 'undefined') {
-      modVal = true;
+      formatedModVal = true;
     } else if (typeModVal === 'boolean') {
-      modVal === false && (modVal = '');
+      if (formatedModVal === false) formatedModVal = '';
     } else {
-      modVal = modVal.toString();
-      className += '_' + modVal;
+      formatedModVal = formatedModVal.toString();
+      className += `_${formatedModVal}`;
     }
 
     return this.domElem.classList.contains(className);
@@ -185,7 +190,7 @@ const BemEntityMixinImplementation = Base => class BemEntity extends Base {
    */
   _emit(name, detail, props) {
     this.domElem.dispatchEvent(
-      new CustomEvent(name,  {
+      new CustomEvent(name, {
         bubbles: true,
         cancelable: true,
         detail: {

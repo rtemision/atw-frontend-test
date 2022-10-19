@@ -3,28 +3,29 @@ import { DomElement } from '@/components/dom-element';
 import { BemEntityMixin } from '@/components/bem-entity';
 import { throttle } from '@/components/functions/__throttle';
 import { resizeObserver } from '@/components/resize-observer';
+// eslint-disable-next-line import/extensions
 import anime from 'animejs/lib/anime.es.js';
 
-const areaFraction = .05;
+const areaFraction = 0.05;
 
 const getDistance = (a, b) => Math.abs(a - b);
 
 const coordsIsEmpty = (coords) => {
   const values = Object.values(coords);
-  return values.length ?
-    Object.values(coords).indexOf(-1) >= 0 :
-    false;
+  return values.length
+    ? Object.values(coords).indexOf(-1) >= 0
+    : false;
 };
 
 export class PhotoShow extends BemEntityMixin(DomElement) {
-
   static instances = {};
+
   static bemEntityName = 'photo-show';
 
   constructor(domElem) {
     super(domElem);
 
-    const bemEntityName = this.bemEntityName;
+    const { bemEntityName } = this;
 
     this._items = domElem.querySelectorAll(`.${bemEntityName}__item`);
     this._images = domElem.querySelectorAll(`.${bemEntityName}__img`);
@@ -37,7 +38,7 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
     this._lastPointerAnimPos = { x: -1, y: -1 };
     this._trottledPointerMove = throttle(this._onPointerMove, 50, this);
 
-    this.hasMod('enabled') && this._start();
+    if (this.hasMod('enabled')) this._start();
 
     domElem.addEventListener('mod-change', this._onModChange.bind(this));
   }
@@ -47,7 +48,7 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
 
     resizeObserver.add(domElem, throttle(this._onResize, 1000, this));
 
-    ['mousemove', 'touchmove'].forEach(e => {
+    ['mousemove', 'touchmove'].forEach((e) => {
       domElem.addEventListener(e, _trottledPointerMove);
     });
   }
@@ -57,16 +58,18 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
 
     resizeObserver.remove(domElem);
 
-    ['mousemove', 'touchmove'].forEach(e => {
+    ['mousemove', 'touchmove'].forEach((e) => {
       domElem.removeEventListener(e, _trottledPointerMove);
     });
   }
 
   _onModChange({ detail }) {
     if (detail.modName === 'enabled') {
-      detail.modVal ?
-        this._start() :
+      if (detail.modVal) {
+        this._start();
+      } else {
         this._stop();
+      }
     }
   }
 
@@ -94,13 +97,15 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
 
       let hypot = 0;
 
-      lastPointerAnimPosIsEmpty ||
-        (hypot = Math.hypot(
+      if (!lastPointerAnimPosIsEmpty) {
+        hypot = Math.hypot(
           getDistance(x1, lastPointerAnimPos.x),
           getDistance(y1, lastPointerAnimPos.y)
-        ));
+        );
+      }
 
       if (lastPointerAnimPosIsEmpty || minDistance < hypot) {
+        // eslint-disable-next-line object-curly-newline
         this._animate({ x0, y0, x1, y1 });
         lastPointerAnimPos.x = x1;
         lastPointerAnimPos.y = y1;
@@ -119,6 +124,7 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
    * @param {Number} data.x1 x coord to
    * @param {Number} data.y1 y coord to
    */
+  // eslint-disable-next-line object-curly-newline
   _animate({ x0, y0, x1, y1 }) {
     const index = this._index;
     const item = this._items[index];
@@ -126,11 +132,13 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
     const itemStyle = item.style;
     const animations = this._animations;
 
-    animations.has(item) && anime.remove(item);
-    animations.has(itemImg) && anime.remove(itemImg);
+    if (animations.has(item)) anime.remove(item);
+    if (animations.has(itemImg)) anime.remove(itemImg);
 
-    itemStyle.zIndex = this._zIndex++;
+    itemStyle.zIndex = this._zIndex;
     itemStyle.visibility = 'visible';
+
+    this._zIndex += 1;
 
     anime.timeline({
       easing: 'easeOutExpo',
@@ -139,7 +147,9 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
         animations.set(item, true);
         animations.set(itemImg, true);
 
-        if (++this._index >= this._length) {
+        this._index += 1;
+
+        if (this._index >= this._length) {
           this._index = 0;
         }
       },
@@ -176,5 +186,5 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
 
 domReady.then(() => {
   document.querySelectorAll(`.${PhotoShow.bemEntityName}`)
-    .forEach(el => new PhotoShow(el));
+    .forEach((el) => new PhotoShow(el));
 });

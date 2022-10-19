@@ -4,4 +4,4 @@ export const domReady = new Promise((resolve) => {
   } else {
     resolve();
   }
-})
+});

@@ -7,4 +7,5 @@ import './__body/page__body.scss';
 import './__inner/page__inner.scss';
 // import './__footer/page__footer.scss';
 import './_view/page_view_default.scss';
+
 export * from './page';

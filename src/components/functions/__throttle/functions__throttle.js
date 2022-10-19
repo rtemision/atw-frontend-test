@@ -9,21 +9,25 @@
  * @param {Object} [ctx] context of function invocation
  * @returns {Function} throttled function
  */
- export function throttle(fn, timeout, invokeAsap, ctx) {
+export function throttle(fn, timeout, invokeAsap, ctx) {
   const typeofInvokeAsap = typeof invokeAsap;
+  let context = ctx;
+  let invAsap;
 
   if (typeofInvokeAsap === 'undefined') {
-    invokeAsap = true;
+    invAsap = true;
   } else if (arguments.length === 3 && typeofInvokeAsap !== 'boolean') {
-    ctx = invokeAsap;
-    invokeAsap = true;
+    context = invokeAsap;
+    invAsap = true;
   }
 
-  let timer, args, needInvoke;
+  let timer;
+  let args;
+  let needInvoke;
 
-  let wrapper = function() {
+  const wrapper = () => {
     if (needInvoke) {
-      fn.apply(ctx, args);
+      fn.apply(context, args);
       needInvoke = false;
       timer = global.setTimeout(wrapper, timeout);
     } else {
@@ -31,15 +35,19 @@
     }
   };
 
-  return function() {
+  // eslint-disable-next-line func-names
+  return function () {
+    // eslint-disable-next-line prefer-rest-params
     args = arguments;
-    ctx || (ctx = this);
+    if (!context) (context = this);
     needInvoke = true;
 
     if (!timer) {
-      invokeAsap?
-        wrapper() :
+      if (invAsap) {
+        wrapper();
+      } else {
         timer = global.setTimeout(wrapper, timeout);
+      }
     }
   };
 }
