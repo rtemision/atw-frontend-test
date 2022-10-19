@@ -1,0 +1,6 @@
+@import '../mixins/button_text-limited.scss';
+
+.button_width_limited {
+  max-width: 100%;
+  @include button_text-limited;
+}

@@ -1,0 +1,9 @@
+@mixin button_text-limited {
+  white-space: nowrap;
+
+  .button__text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -10,7 +10,26 @@ export class Cursor extends BemEntityMixin(DomElement) {
 
   constructor(domElem) {
     super(domElem);
-    document.body.addEventListener('mousemove', throttle(this._onMouseMove, 100, this));
+    this.throttledMouseMove = throttle(this._onMouseMove, 100, this);
+    this.hasMod('enabled') && this._start();
+    domElem.addEventListener('mod-change', this._onModChange.bind(this));
+  }
+
+  _start() {
+    document.body.addEventListener('mousemove', this.throttledMouseMove);
+  }
+
+  _stop() {
+    document.body.removeEventListener('mousemove', this.throttledMouseMove);
+    this.delMod('visible');
+  }
+
+  _onModChange({ detail }) {
+    if (detail.modName === 'enabled') {
+      detail.modVal ?
+        this._start() :
+        this._stop();
+    }
   }
 
   _onMouseMove(e) {

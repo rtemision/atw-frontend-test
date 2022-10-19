@@ -9,7 +9,6 @@
     letter-spacing: var(--typography-body-letter-spacing);
     color: var(--color-typo-base);
     background: var(--color-fill-base);
-    cursor: url("../../../assets/icons/cursor-32.svg") 11 6, default;
 
     *::selection {
       color: var(--color-typo-selection);
@@ -19,5 +18,11 @@
 
   .page__section-main {
     flex: 1;
+  }
+
+  &.page_cursor_custom {
+    .page__body {
+      cursor: url("../../../assets/icons/cursor-32.svg") 11 6, default;
+    }
   }
 }

@@ -1,0 +1,38 @@
+@import '../mixins/button_filled.scss';
+@import '../mixins/button_checked.scss';
+
+.button_view_default {
+  @include button_filled(
+    400, /* $fontWeight */
+
+    var(--color-button-view-default-typo-base), /* $colorBase */
+    var(--color-button-view-default-fill-base), /* $fillBase */
+    var(--color-button-view-default-border-base), /* $borderColorBase */
+    var(--button-view-default-border-width), /* $borderWidth */
+    var(--button-view-default-border-radius), /* $borderRadius */
+
+    var(--color-button-view-default-typo-hovered), /* $colorHovered */
+    var(--color-button-view-default-fill-hovered), /* $fillHovered */
+    var(--color-button-view-default-border-hovered), /* $borderColorHovered */
+
+    var(--color-button-view-default-typo-pressed), /* $colorPressed */
+    var(--color-button-view-default-fill-pressed), /* $fillPressed */
+    var(--color-button-view-default-border-pressed), /* $borderColorPressed */
+
+    var(--color-button-view-default-typo-focused), /* $colorFocused */
+    var(--color-button-view-default-fill-focused), /* $fillFocused */
+    var(--color-button-view-default-border-focused), /* $borderColorFocused */
+    var(--color-button-view-default-box-shadow-focused), /* $boxShadowColorFocused */
+
+    var(--color-button-view-default-typo-disabled), /* $colorDisabled */
+    var(--color-button-view-default-fill-disabled), /* $fillDisabled */
+    var(--color-button-view-default-border-disabled) /* $borderDisabled  */
+  );
+
+  @include button_checked(
+    var(--color-button-view-default-fill-checked), /* $fillChecked */
+    var(--color-button-view-default-border-checked), /* $borderColorChecked */
+    var(--color-button-view-default-fill-checked-hovered), /* $fillHovered */
+    var(--color-button-view-default-border-checked-hovered) /* $borderColorHovered */
+  );
+}

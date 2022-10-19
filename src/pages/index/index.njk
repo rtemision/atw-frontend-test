@@ -2,18 +2,21 @@
 {% from 'icon/icon.njk' import icon %}
 {% from 'cursor/cursor.njk' import cursor %}
 {% from 'picture/picture.njk' import picture %}
+{% from 'button/button.njk' import button %}
 
 {% set page = {
   title: 'Index',
   lang: 'en',
-  classlist: ['page_type_root']
+  classlist: [
+    'page_type_root'
+  ]
 } %}
 {% extends 'page/page.njk' %}
 {% block main %}
 
-  {{ cursor({ mods: { view: 'default' } }) }}
+  {{ cursor({ mods: { view: 'default', enabled: true } }) }}
 
-  <section class="section section_view_main photo-show page__section-main">
+  <section class="section section_view_main photo-show photo-show_enabled page__section-main">
     <div class="section__inner">
       <div class="section__images">
         {% for item in [
@@ -71,52 +74,114 @@
           </div>
         {% endfor %}
       </div>
-      <div class="layout">
-        {{ snetworks({
-          mods: {
-            view: 'default',
-            size: 'm'
-          },
-          mix: {
-            block: 'section',
-            elem: 'snetworks'
-          },
-          title: 'Links',
-          items: [
-            {
-              icon: icon({
-                mods: { color: 'twitter' },
-                content: '<svg><use xlink:href="/spritemap.svg#sprite-twitter" /></svg>'
-              }),
-              text: 'Twitter',
-              url: 'https://twitter.com'
+      <div class="layout layout_type_grid layout_tpl_section-main">
+        <div class="layout__fr layout__fr_area_snetworks">
+          {{ snetworks({
+            mods: {
+              view: 'default',
+              size: 'm'
             },
-            {
-              icon: icon({
-                mods: { color: 'vk' },
-                content: '<svg><use xlink:href="/spritemap.svg#sprite-vk" /></svg>'
-              }),
-              text: 'VK',
-              url: 'https://vk.com'
+            mix: {
+              block: 'section',
+              elem: 'snetworks'
             },
-            {
-              icon: icon({
-                mods: { color: 'telegram' },
-                content: '<svg><use xlink:href="/spritemap.svg#sprite-telegram" /></svg>'
-              }),
-              text: 'Telegram',
-              url: 'https://telegram.org'
-            },
-            {
-              icon: icon({
-                mods: { color: 'youtube' },
-                content: '<svg><use xlink:href="/spritemap.svg#sprite-youtube" /></svg>'
-              }),
-              text: 'Youtube',
-              url: 'https://youtube.com'
-            }
-          ]
-        }) }}
+            title: 'Links',
+            items: [
+              {
+                icon: icon({
+                  mods: { color: 'twitter' },
+                  content: '<svg><use xlink:href="/spritemap.svg#sprite-twitter" /></svg>'
+                }),
+                text: 'Twitter',
+                url: 'https://twitter.com'
+              },
+              {
+                icon: icon({
+                  mods: { color: 'vk' },
+                  content: '<svg><use xlink:href="/spritemap.svg#sprite-vk" /></svg>'
+                }),
+                text: 'VK',
+                url: 'https://vk.com'
+              },
+              {
+                icon: icon({
+                  mods: { color: 'telegram' },
+                  content: '<svg><use xlink:href="/spritemap.svg#sprite-telegram" /></svg>'
+                }),
+                text: 'Telegram',
+                url: 'https://telegram.org'
+              },
+              {
+                icon: icon({
+                  mods: { color: 'youtube' },
+                  content: '<svg><use xlink:href="/spritemap.svg#sprite-youtube" /></svg>'
+                }),
+                text: 'Youtube',
+                url: 'https://youtube.com'
+              }
+            ]
+          }) }}
+        </div>
+        <div class="layout__fr layout__fr_area_controls">
+          <div class="control-panel control-panel_view_default">
+            <div class="control-panel__button-group">
+              {{ button({
+                mods: {
+                  view: 'default',
+                  size: 'm',
+                  toggable: true,
+                  mode: 'check',
+                  checked: true
+                },
+                mix: { block: 'control-panel', elem: 'button' },
+                attrs: {
+                  'data-params': {
+                    'button': {
+                      feature: 'custom-cursor'
+                    }
+                  }
+                },
+                text: 'Custom Cursor'
+              }) }}
+              {{ button({
+                mods: {
+                  view: 'default',
+                  size: 'm',
+                  toggable: true,
+                  mode: 'check',
+                  checked: true
+                },
+                mix: { block: 'control-panel', elem: 'button' },
+                attrs: {
+                  'data-params': {
+                    'button': {
+                      feature: 'cursor-tracker'
+                    }
+                  }
+                },
+                text: 'Cursor Tracker'
+              }) }}
+              {{ button({
+                mods: {
+                  view: 'default',
+                  size: 'm',
+                  toggable: true,
+                  mode: 'check',
+                  checked: true
+                },
+                mix: { block: 'control-panel', elem: 'button' },
+                attrs: {
+                  'data-params': {
+                    'button': {
+                      feature: 'cursor-photos'
+                    }
+                  }
+                },
+                text: 'Cursor Photos'
+              }) }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>

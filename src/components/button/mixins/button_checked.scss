@@ -1,0 +1,22 @@
+@mixin button_checked(
+  $fillChecked,
+  $borderColorChecked,
+  $fillHovered,
+  $borderColorHovered,) {
+
+  &.button_checked {
+    &::before {
+      background: #{$fillChecked};
+      border-color: #{$borderColorChecked};
+    }
+
+    @media (any-hover: hover) {
+      &:not([aria-disabled='true']):hover {
+        &::before {
+          background: #{$fillHovered};
+          border-color: #{$borderColorHovered};
+        }
+      }
+    }
+  }
+}

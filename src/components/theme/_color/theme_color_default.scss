@@ -37,4 +37,31 @@ $color-typo-disabled: #8f8f8f;
   --color-link-view-text-border-base: #{rgba($color-typo-base, 30%)};
   --color-link-view-text-border-hovered: var(--color-brand-primary);
   --color-link-view-text-border-disabled: #{rgba($color-typo-disabled, 30%)};
+
+  --color-button-view-default-typo-base: var(--color-control-typo-base);
+  --color-button-view-default-border-base: var(--color-control-border-base);
+  --color-button-view-default-fill-base: var(--color-control-fill-base);
+
+  --color-button-view-default-typo-hovered: var(--color-button-view-default-typo-base);
+  --color-button-view-default-border-hovered: var(--color-control-border-disabled);
+  --color-button-view-default-fill-hovered: var(--color-button-view-default-fill-base);
+
+  --color-button-view-default-typo-focused: var(--color-button-view-default-typo-base);
+  --color-button-view-default-border-focused: var(--color-button-view-default-border-base);
+  --color-button-view-default-fill-focused: var(--color-button-view-default-fill-base);
+
+  --color-button-view-default-typo-pressed: var(--color-button-view-default-typo-base);
+  --color-button-view-default-border-pressed: var(--color-control-border-disabled);
+  --color-button-view-default-fill-pressed: #f8f6f6;
+  --color-button-view-default-box-shadow-focused: #{rgba($color-brand-primary, 70%)};
+
+  --color-button-view-default-typo-disabled: var(--color-typo-disabled);
+  --color-button-view-default-border-disabled: var(--color-button-view-default-border-base);
+  --color-button-view-default-fill-disabled: var(--color-control-fill-disabled);
+
+  --color-button-view-default-border-checked: #{darken($color-brand-primary, 10%)};
+  --color-button-view-default-fill-checked: #{lighten($color-brand-primary, 30%)};
+
+  --color-button-view-default-border-checked-hovered: var(--color-button-view-default-border-checked);
+  --color-button-view-default-fill-checked-hovered: #{lighten($color-brand-primary, 20%)};
 }

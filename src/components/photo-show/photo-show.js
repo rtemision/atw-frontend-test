@@ -35,12 +35,39 @@ export class PhotoShow extends BemEntityMixin(DomElement) {
     this._areaSize = { width: 0, height: 0, max: 0 };
     this._lastPointerPos = { x: -1, y: -1 };
     this._lastPointerAnimPos = { x: -1, y: -1 };
+    this._trottledPointerMove = throttle(this._onPointerMove, 50, this);
+
+    this.hasMod('enabled') && this._start();
+
+    domElem.addEventListener('mod-change', this._onModChange.bind(this));
+  }
+
+  _start() {
+    const { domElem, _trottledPointerMove } = this;
 
     resizeObserver.add(domElem, throttle(this._onResize, 1000, this));
 
     ['mousemove', 'touchmove'].forEach(e => {
-      domElem.addEventListener(e, throttle(this._onPointerMove, 50, this));
+      domElem.addEventListener(e, _trottledPointerMove);
     });
+  }
+
+  _stop() {
+    const { domElem, _trottledPointerMove } = this;
+
+    resizeObserver.remove(domElem);
+
+    ['mousemove', 'touchmove'].forEach(e => {
+      domElem.removeEventListener(e, _trottledPointerMove);
+    });
+  }
+
+  _onModChange({ detail }) {
+    if (detail.modName === 'enabled') {
+      detail.modVal ?
+        this._start() :
+        this._stop();
+    }
   }
 
   _onResize(entry) {
