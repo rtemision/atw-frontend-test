@@ -30,6 +30,11 @@ Build dist
 npm run build
 ```
 
+Run linter
+```bash
+npm run lint
+```
+
 ## Some used techs
 - [webpack](https://webpack.js.org/)
 - [nunjucks](https://mozilla.github.io/nunjucks/)
