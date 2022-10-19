@@ -3,6 +3,7 @@ import { DomElement } from '@/components/dom-element';
 import { BemEntityMixin } from '@/components/bem-entity';
 import { ButtonToggable } from '@/components/button';
 import Cookies from 'js-cookie';
+import isMobile from 'is-mobile';
 
 const cookieName = 'features';
 const cookieSettings = {
@@ -40,6 +41,8 @@ export class ControlPanel extends BemEntityMixin(DomElement) {
      * according to what is stored in the cookies
      */
     this._loadFeaturesFromCookies();
+
+    isMobile() && this._disableFeaturesOnMobile();
   }
 
   _loadFeaturesFromButtons() {
@@ -67,6 +70,16 @@ export class ControlPanel extends BemEntityMixin(DomElement) {
         button && button.setMod('checked', cookieVal);
       }
     }
+  }
+
+  _disableFeaturesOnMobile() {
+    this._buttons.forEach(button => {
+      if (!button.params.mobile) {
+        button
+          .delMod('checked')
+          .setMod('disabled');
+      }
+    });
   }
 
   _getButtonFeature(feature) {
