@@ -1,0 +1,38 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "selector-class-pattern": null,
+    "custom-property-empty-line-before": null,
+    "string-quotes": null,
+    "number-leading-zero": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "color-function-notation": null,
+    "at-rule-empty-line-before": [
+      "always", {
+        "except": [
+          "blockless-after-same-name-blockless",
+          "first-nested"
+        ],
+        "ignore": [
+          "after-comment"
+        ],
+        "ignoreAtRules": [
+          "include",
+          "else"
+        ]
+      }
+    ],
+    "comment-empty-line-before": [
+			"always", {
+				"except": ["first-nested"],
+				"ignore": [
+          "after-comment",
+          "stylelint-commands"
+        ]
+			}
+		],
+    "scss/at-mixin-pattern": null,
+    "scss/no-global-function-names": null
+  },
+  "ignoreFiles": ["src/components/sprites/_sprites.scss"]
+}
