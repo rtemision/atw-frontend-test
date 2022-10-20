@@ -23,14 +23,14 @@
       }
     ],
     "comment-empty-line-before": [
-			"always", {
-				"except": ["first-nested"],
-				"ignore": [
+      "always", {
+        "except": ["first-nested"],
+        "ignore": [
           "after-comment",
           "stylelint-commands"
         ]
-			}
-		],
+      }
+    ],
     "scss/at-mixin-pattern": null,
     "scss/no-global-function-names": null
   },
