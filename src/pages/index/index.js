@@ -1,6 +1,5 @@
 import '@/components/app';
 import '@/components/page';
-import '@/components/page/_type/page_type_root';
 import '@/components/snetworks';
 import '@/components/cursor';
 import '@/components/photo-show';

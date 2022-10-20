@@ -24,6 +24,7 @@
   $fillDisabled,
   $borderDisabled) {
 
+  /* stylelint-disable-next-line declaration-empty-line-before */
   font-weight: #{$fontWeight};
   color: #{$colorBase};
   z-index: 0;
@@ -60,7 +61,7 @@
     &::before {
       background: #{$fillFocused};
       border-color: #{$borderColorFocused};
-      box-shadow: 0px 0px 0px 1px #{$boxShadowColorFocused};
+      box-shadow: 0 0 0 1px #{$boxShadowColorFocused};
     }
   }
 

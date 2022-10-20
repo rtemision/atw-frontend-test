@@ -18,7 +18,7 @@
     box-sizing: border-box;
     transition: border-color .15s ease-in;
     padding-bottom: .05em;
-    border-width: 0 0 1px 0;
+    border-width: 0 0 1px;
     border-style: var(--link-border-style, solid);
     border-color: var(--link-border-color);
   }

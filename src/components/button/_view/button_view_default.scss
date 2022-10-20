@@ -1,5 +1,5 @@
-@import '../mixins/button_filled.scss';
-@import '../mixins/button_checked.scss';
+@import '../mixins/button_filled';
+@import '../mixins/button_checked';
 
 .button_view_default {
   @include button_filled(

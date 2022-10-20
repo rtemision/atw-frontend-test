@@ -2,8 +2,9 @@
   $fillChecked,
   $borderColorChecked,
   $fillHovered,
-  $borderColorHovered,) {
+  $borderColorHovered) {
 
+  /* stylelint-disable-next-line rule-empty-line-before */
   &.button_checked {
     &::before {
       background: #{$fillChecked};
